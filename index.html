@@ -38,21 +38,20 @@ button{border:none;border-radius:999px;padding:10px 14px;font-size:18px;backgrou
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-/* ===== CONFIG FIREBASE : remplace les valeurs ci-dessous par celles de ton projet ===== */
 const firebaseConfig = {
-  apiKey: "REMPLACER",
-  authDomain: "REMPLACER.firebaseapp.com",
-  databaseURL: "https://REMPLACER-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "REMPLACER",
-  appId: "REMPLACER"
+  apiKey: "AIzaSyAt7HgfxyHatm1pYUstfDDhSI97JjjFeto",
+  authDomain: "discussion-78455.firebaseapp.com",
+  databaseURL: "https://discussion-78455-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "discussion-78455",
+  storageBucket: "discussion-78455.firebasestorage.app",
+  messagingSenderId: "806414736416",
+  appId: "1:806414736416:web:e3219094e0b78859f5f045"
 };
-/* ================================================================================== */
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const messagesRef = db.ref('messages');
 
-// Identifiant anonyme aléatoire stocké dans le navigateur (aucun nom, aucun compte)
 const myId = (() => {
   try {
     let id = localStorage.getItem('anonId');
@@ -74,7 +73,6 @@ function colorFor(id) {
   return COLORS[h % COLORS.length];
 }
 
-// Réception des messages en temps réel (les 200 derniers)
 messagesRef.limitToLast(200).on('child_added', snap => {
   const m = snap.val();
   if (!m) return;
@@ -91,7 +89,6 @@ messagesRef.limitToLast(200).on('child_added', snap => {
   box.scrollTop = box.scrollHeight;
 });
 
-// Envoi
 form.addEventListener('submit', e => {
   e.preventDefault();
   const t = input.value.trim();
@@ -100,7 +97,6 @@ form.addEventListener('submit', e => {
   input.value = '';
 });
 
-// Sélecteur d'emojis
 const EMOJIS = ['😀','😂','🥰','😎','🤔','😭','😅','🤣','🙃','👀','👍','👎','🙏','🔥','🎉','🥳','❤️','💀','😴','😡','🤷','👋','✨','🍕'];
 EMOJIS.forEach(em => {
   const s = document.createElement('span');
@@ -116,3 +112,4 @@ emojiBtn.addEventListener('click', () => emojiPanel.classList.toggle('open'));
 </script>
 </body>
 </html>
+
